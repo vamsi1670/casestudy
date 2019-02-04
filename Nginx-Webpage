@@ -1,2 +1,3 @@
 install nginx and host a webpage.
 Started working with RHEL 7.6 but unable to upgrade/update the epel-release packages so installed the Nginx server in Ubuntu16.04.
+Configured a webpage in nginx sever ,but due to organizations policies i think the webpage is not opening.
