@@ -1,0 +1,15 @@
+Clone the source code of Nginx from repository.package the source for whatever operating system you have choosen.rpm,deb & etc.
+i have cloned the retired (unofficial) repository because pull requests on github of  official repository are not accespted.
+
+1.Clone the Nginx code from repository (unofficial repository)
+cloned the repository in to /home/testdirectory/casestudy/nginx/sourcecode
+#git clone https://github.com/nginx/nginx-releases.git
+
+2.Clone Nginx code from the official repository (official repository)
+cloned the repo from "https://github.com/nginx/nginx.git" to /home/testdirectory/casestudy/nginx/sourcecodenew/
+# git clone https://github.com/nginx/nginx.git
+
+To validate the version of Ubuntu:
+#lsb_release -a
+
+
