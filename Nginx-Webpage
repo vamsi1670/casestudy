@@ -2,5 +2,42 @@ install nginx and host a webpage.
 Started working with RHEL 7.6 but unable to upgrade/update the epel-release packages so installed the Nginx server in Ubuntu16.04
 using link "https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04"
 Configured a webpage in nginx sever ,but due to organizations policies i think the webpage is not opening.
-unable to add the cert.using the link  "https://medium.com/@jgefroh/a-guide-to-using-nginx-for-static-websites-d96a9d034940"
-have to enable encryption for Nginx.
+
+Configured an index.html page (static webpage in ) in Nginx.
+The following are the steps
+
+launch Webpage in Nginx.-------------------------------------------------------
+
+1. install Nginx in ubuntu server.
+2. by htting the ip address in the browser we can see the Nginx browsing page.
+3. cahnge the directory to root. #cd /
+4. Go to the folder where Nginx is installed.  
+	#cd /etc/nginx/
+5.change directory to sitesenabled.
+	#cd sites-enabled
+6. this is the directory where the nginx index.html is located
+	#cd /usr/share/nginx/html 
+The nginx webpage is referring to the index.html file.
+7. move the directory cd /etc/nginx/nginx.conf (open this config file.)
+8 Copy the old configuration file in to a new file and save.
+	#mv nginx.conf nginxold.conf (either move the original conf file or copy the original file ad delete the old one.)
+9.Create a new nginx.conf file and add the below lines in the file.
+	
+	events{
+	}
+	http{
+		server {
+			location / {
+				root /data/www;
+			}
+		}
+	}		
+
+10. test the configuration file by using command
+	#sudo nginx -t 
+11. change directory cd /etc.nginx/   and reload the configuraion file.
+	#sudo service nginx reload.
+12. Clone the git repository in ti cd/tmp/  "git clone https://github.com/eriklinde/html5_template.git "
+13 After cloning the repository move the index.html file in to cd/data/www/
+	enter the ipaddress to validate the index.html is shown in the browser.
+	
