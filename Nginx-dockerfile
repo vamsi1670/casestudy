@@ -1,0 +1,28 @@
+FROM nginx:1.15
+RUN apt-get update -y
+#@WORKDIR /etc/nginx/
+#RUN touch nginxold.conf
+RUN mv /etc/nginx/nginx.conf /etc/nginx/nginxold.conf
+#WORKDIR /etc/nginx
+#RUN touch nginx.conf
+
+#COPY entrypoint.sh /entrypoint.sh
+#RUN chmod 0755 /entrypoint.sh
+#ENTRYPOINT ["/entrypoint.sh"]
+
+
+RUN cd /tmp/
+WORKDIR /tmp/
+RUN mkdir data
+WORKDIR /tmp/data/
+RUN mkdir www
+#RUN chmod 777 /data/www
+
+
+Copied these 2 files by using docker command after running a container.
+copied the file using the docker copy command.
+docker cp nginx.conf <containerID>:/etc/nginx/
+docker cp nginx.conf <4184bb0af7a0>:/etc/nginx/  
+docker cp index.html <containerID>:/tmp/data/www/
+docker cp index.html 4184bb0af7a0:/tmp/data/www/
+				
