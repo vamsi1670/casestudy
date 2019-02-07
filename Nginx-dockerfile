@@ -26,3 +26,15 @@ docker cp nginx.conf <4184bb0af7a0>:/etc/nginx/
 docker cp index.html <containerID>:/tmp/data/www/
 docker cp index.html 4184bb0af7a0:/tmp/data/www/
 				
+07/02/2019 -- docker file 
+tired to copy the current directory folders  in to the docker container and this procedure is successful.
+Dockerfile
+______________________________________________________________________________
+FROM nginx:1.15
+RUN apt-get update -y
+RUN mv /usr/share/nginx/html/index.html /usr/share/nginx/html/indexold.html
+COPY ./index.html  /usr/share/nginx/html/
+_______________________________________________________________________________
+By using this the index.html is copied to the respective folder in the container.
+have to execute and validate the rest of the tasks.
+
