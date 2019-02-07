@@ -1,7 +1,6 @@
 install nginx and host a webpage.
 Started working with RHEL 7.6 but unable to upgrade/update the epel-release packages so installed the Nginx server in Ubuntu16.04
 using link "https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04"
-Configured a webpage in nginx sever ,but due to organizations policies i think the webpage is not opening.
 
 Configured an index.html page (static webpage in ) in Nginx.
 The following are the steps
