@@ -1,0 +1,15 @@
+task:Convert the cource nginx code in to debian package.
+
+step1: clone the repository of nginx source code from github.
+
+step2: #sudo apt-get install checkinstall 
+To convert the sourcecode in to debian package in ubuntu command is #checkinstall make sourcecode. after successful execution there are 2 files creted.
+1.description-pak and 2.nginx_<date>_amd.64.deb .
+this .deb package can be installed  in ubuntu server.
+the source code need not to be converted in to .tar.gz to convert in to debian package.
+
+step3: #sudo apt-get install alien 
+to convert sourcecode in to debian package using alien the source code must be in .tar.gz file format.
+To convert the source code in to debian package in  ubuntu command is #alien sourcecode.tar.gz.After successful exceution 
+.tar.gz is converted in to sourcecode_1-2_all.deb.
+This .deb package can be installed in ubuntu server
