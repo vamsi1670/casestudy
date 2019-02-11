@@ -7,62 +7,64 @@ Validate the keypair is created or not.
 
 Step2:Create a VPC 
 #aws ec2 create-vpc --cidr-block 10.0.0.0/16
-VPCID:"vpc-08d2c6d4c89c730f9"
+VPCID:"vpc-" /"VPC-ID"
 
 
 Step3:Create first subnet using the VPC ID with 10.0.1.0/24 CIDR block.
-#aws ec2 createsubnet --vpc-id vpc-08d2c6d4c89c730f9 --cidr-block 10.0.1.0/24
-SubnetID: "subnet-06317dc3132d85cca"
+#aws ec2 createsubnet --vpc-id "vpc-ID" --cidr-block 10.0.1.0/24
+SubnetID: "subnet-" / "SUBNET-ID"
 
 Step4:Create second subnet in your VPC with 10.0.0.0/24 CIDR block 
-#aws ec2 create-subnet --vpc-id vpc-08d2c6d4c89c730f9 --cidr-block 10.0.0.0/24
-"SubnetId": "subnet-001e230a9ebbaa989"
+#aws ec2 create-subnet --vpc-id "vpc-ID" --cidr-block 10.0.0.0/24
+"SubnetId": "subnet-ID" "SUBNET-ID"
 
 Step5:Make your  subnet public 
 5(a) create an internet gateway
 #aws ec2 create-internet-gateway
-"InternetGatewayId": "igw-00de7dcca0b2fb94c"
+"InternetGatewayId": "igw-00d"/"IGW-ID"
 
 5(b) Attach the IGW to the VPC created using the VPCID
-#aws ec2 attachinternet-gateway --vpc-id vpc-08d2c6d4c89c730f9 --internet-gateway-id igw-00de7dcca0b2fb94c
+#aws ec2 attachinternet-gateway --vpc-id "vpc-ID" --internet-gateway-id "igw-ID"
 
 5(c) Create a custom route table for your VPC.
-#aws ec2 create-route-table --vpc-id vpc-08d2c6d4c89c730f9
-"RouteTableId": "rtb-02263295afa542eaa"
+#aws ec2 create-route-table --vpc-id vpc-ID
+"RouteTableId": "rtb-022" / "Routetable-ID"
 
 5(d) Create a route table that points all the traffic to the  IGW
-#aws ec2 create-route --route-table-id rtb-02263295afa542eaa --destination-cidr-block 0.0.0.0/0 --gateway-id igw-00de7dcca0b2fb94c
+#aws ec2 create-route --route-table-id "rtb-ID" --destination-cidr-block 0.0.0.0/0 --gateway-id "igw-ID"
 After successful cretion: return is true.
 
 To validate:
-#aws ec2 describe-route-tables --route-table-id rtb-02263295afa542eaa
+#aws ec2 describe-route-tables --route-table-id rtb-ID
 
 Display all the subnets associated with your VPC:
-#aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-08d2c6d4c89c730f9" --query 'Subnets[*].{ID:SubnetId,CIDR:CidrBlock}'
+#aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-ID" --query 'Subnets[*].{ID:SubnetId,CIDR:CidrBlock}'
 List of subnets and IDs will be displayed.
 
 5(e) Route table to be associated with subnet,need to associate with a subnet in your VPC so that traffic from subnet is routed to IGW.
 Select the subnet that is to acting as public subnet.
-#aws ec2 associate-route-table  --subnet-id subnet-06317dc3132d85cca --route-table-id rtb-02263295afa542eaa
+#aws ec2 associate-route-table  --subnet-id subnet-ID --route-table-id rtb-ID "RTB-ID"
 After successful association an association ID wil be generated.
-"AssociationId": "rtbassoc-0fb131a3beddf7ca8"
+"AssociationId": "rtbassoc-0fb131a3beddf7ca"
 
 
 Step6: Create a security group for the specified VPC.
-#aws ec2 create-security-group --group-name my-sg --description "My security group" --vpc-id vpc-08d2c6d4c89c730f9
-"GroupId": "sg-0c7ca1fd04c696275"
+#aws ec2 create-security-group --group-name my-sg --description "My security group" --vpc-id "vpc-ID"
+"GroupId": "sg-ID"/ "Securitygroup-ID"
 
-#aws ec2 describe-security-groups --group-ids sg-0c7ca1fd04c696275
+#aws ec2 describe-security-groups --group-ids "sg-ID"
 In the  security group created  in the VPC add rule that allows SSH access from anywhere.
-#aws ec2 authorize-security-group-ingress --group-id sg-0c7ca1fd04c696275 --protocol tcp --port 22 --cidr 0.0.0.0/0
+#aws ec2 authorize-security-group-ingress --group-id "sg-ID" --protocol tcp --port 22 --cidr 0.0.0.0/0
+################sg-ID seuriy group id has to be given###############################
 
 Step7:
 Create an instance in the public subnet using the security group
-#aws ec2 run-instances --image-id ami-036affea69a1101c5 --count 1 --instance-type t2.micro --key-name demoeypair --security-group-ids sg-0c7ca1fd04c696275 --subnet-id subnet-06317dc3132d85cca
+#aws ec2 run-instances --image-id ami-id / "AMI-ID" --count 1 --instance-type t2.micro --key-name demoeypair --security-group-ids sg-ID/"security group-ID" --subnet-id subnet-ID/"subnet-ID"
 
-instrance ID: ami-036affea69a1101c9 AMI.
+instrance ID: ami-03........... AMI.
 Validate the AMI:
-#aws ec2 describe-instances --instance-id i-02d8fb8492221fdb0 
+#aws ec2 describe-instances --instance-id i-ID   
+i-ID refers to instance ID which has to be changed.
 
 
 
